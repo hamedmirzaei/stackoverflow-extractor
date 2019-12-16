@@ -5,9 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.client.RestTemplate;
+import qu.task.so.extractor.domain.Question;
 import qu.task.so.extractor.service.StackOverflowExtractorService;
 
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 public class StackOverflowExtractorApi {
@@ -25,7 +27,6 @@ public class StackOverflowExtractorApi {
         //for getting info from stackoverflow
         RestTemplate restTemplate = new RestTemplate();
         model.addAttribute("message", "Hello World!");
-
         return "index";
     }
 
