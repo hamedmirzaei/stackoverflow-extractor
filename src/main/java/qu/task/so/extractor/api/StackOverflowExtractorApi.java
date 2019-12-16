@@ -8,7 +8,8 @@ import org.springframework.web.client.RestTemplate;
 @Controller
 public class StackOverflowExtractorApi {
 
-    final String STACKOVERFLOW_URL = "https://stackoverflow.com/";
+    final String STACKOVERFLOW_NEWEST_URL = "https://stackoverflow.com/questions/tagged/android";
+    final String STACKOVERFLOW_MOSTVOTE_URL = "https://stackoverflow.com/questions/tagged/android?tab=Votes";
 
     @GetMapping("/")
     private String handleRealRequest(Model model) {
