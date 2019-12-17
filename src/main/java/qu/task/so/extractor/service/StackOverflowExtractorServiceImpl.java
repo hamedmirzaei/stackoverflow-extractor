@@ -47,6 +47,18 @@ public class StackOverflowExtractorServiceImpl implements StackOverflowExtractor
         return Collections.EMPTY_LIST;
     }
 
+    @Override
+    public Question getNewestQuestion(String questionId) {
+        Question question = this.newestQuestions.get(questionId);
+        return question;
+    }
+
+    @Override
+    public Question getMostVotedQuestion(String questionId) {
+        Question question = this.mostvotedQuestions.get(questionId);
+        return question;
+    }
+
     private List<Question> getQuestionsFromUrl(String questionsUrl) throws IOException {
         List<Question> result = new ArrayList<>();
         Document doc = Jsoup.connect(questionsUrl).get();

@@ -6,13 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.RestTemplate;
-import qu.task.so.extractor.domain.Question;
 import qu.task.so.extractor.service.StackOverflowExtractorService;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Controller
 public class StackOverflowExtractorApi {
@@ -49,7 +45,8 @@ public class StackOverflowExtractorApi {
 
         //for getting info from stackoverflow
         RestTemplate restTemplate = new RestTemplate();
-        model.addAttribute("message", "Welcome to Question " + qid + " Page!");
+        model.addAttribute("newest", "true");
+        model.addAttribute("question", stackOverflowExtractorService.getNewestQuestion(qid));
         return "question";
     }
 
@@ -63,6 +60,16 @@ public class StackOverflowExtractorApi {
         model.addAttribute("mostvoted", "true");
         model.addAttribute("questions", stackOverflowExtractorService.getMostVotedQuestions());
         return "questions";
+    }
+
+    @GetMapping("/mostvoted/{qid}")
+    private String handleMostVotedQuestionPage(Model model, @PathVariable String qid) throws IOException {
+
+        //for getting info from stackoverflow
+        RestTemplate restTemplate = new RestTemplate();
+        model.addAttribute("mostvoted", "true");
+        model.addAttribute("question", stackOverflowExtractorService.getMostVotedQuestion(qid));
+        return "question";
     }
 
     @Autowired

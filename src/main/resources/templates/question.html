@@ -23,9 +23,9 @@
             <a class="navbar-brand" href="#">StackOverflow Extractor</a>
         </div>
         <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Settings</a></li>
-            <li><a href="/newest">Newest</a></li>
-            <li><a href="/mostvoted">Most Voted</a></li>
+            <li><a href="/">Settings</a></li>
+            <li th:class="${newest}? 'active' : 'normal'"><a href="/newest">Newest</a></li>
+            <li th:class="${mostvoted}? 'active' : 'normal'"><a href="/mostvoted">Most Voted</a></li>
         </ul>
     </div>
 </nav>
@@ -33,8 +33,36 @@
 <br>
 <div class="container text-center pagination-centered">
     <div class="page-header">
-        <h3><span th:text="${message}"></span></h3>
+        <h3><span th:text="${question.title}"></span></h3>
     </div>
+    <div class="col-md-3 form-group text-left pull-left">
+        <h4><b><span>Statistics</span></b></h4>
+        <span th:text="${question.stats.votes} + ' votes'"></span><br/>
+        <span th:text="${question.stats.answers} + ' answers'"></span><br/>
+        <span th:text="${question.stats.views} + ' views'"></span><br/>
+        <hr/>
+
+        <h4><b><span>Tags</span></b></h4>
+        <div th:each="tag: ${question.tags}">
+            <span th:text="${tag.name}" class="label label-info"/>
+        </div>
+        <hr/>
+
+        <h4><b><span>Users</span></b></h4>
+        <div th:each="userInfo: ${question.userInfos}">
+            <b><span class="label label-primary" th:text="${userInfo.userName}"/></b><br/>
+            <span th:text="${'Reputation Score: ' + userInfo.reputationScore}"/><br/>
+            <span th:text="${'Gold Badges: ' + userInfo.goldBadges}"/><br/>
+            <span th:text="${'Silver Badges: ' + userInfo.silverBadges}"/><br/>
+            <span th:text="${'Bronze Badges: ' + userInfo.bronzeBadges}"/><br/>
+            <span th:text="${'Action Time: ' + userInfo.actionTime}"/><br/>
+        </div>
+
+    </div>
+    <div class="col-md-9 form-group">
+        <span>Full Body</span>
+    </div>
+    <span class="clearfix"/>
 </div>
 <br>
 <footer class="footer navbar-inverse navbar-fixed-bottom">

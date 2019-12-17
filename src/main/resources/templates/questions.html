@@ -54,7 +54,7 @@
         <tr th:each="question,iterator: ${questions}">
             <td th:class="${question.stats.answerAccepted}? 'mymiddle success' : 'mymiddle error'" th:text="${iterator.index + 1}"></td>
             <td th:utext="'<b>Title:</b> ' + ${question.title} + '<br/> <b>Summary:</b> ' + ${question.summary}"></td>
-            <td class="mymiddle"><a th:href="@{'/newest/' + ${question.id}}">view more</a></td>
+            <td class="mymiddle"><a th:href="@{${newest}?'/newest/' + ${question.id}:'/mostvoted/' + ${question.id}}">view more</a></td>
         </tr>
     </table>
 </div>

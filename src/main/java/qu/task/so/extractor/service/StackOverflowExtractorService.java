@@ -9,4 +9,8 @@ public interface StackOverflowExtractorService {
     List<Question> getNewestQuestions() throws IOException;
 
     List<Question> getMostVotedQuestions();
+
+    Question getNewestQuestion(String questionId);
+
+    Question getMostVotedQuestion(String questionId);
 }
