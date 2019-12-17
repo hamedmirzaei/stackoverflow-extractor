@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.RestTemplate;
 import qu.task.so.extractor.service.StackOverflowExtractorService;
+import qu.task.so.extractor.utils.Constants;
 
 import java.io.IOException;
 
@@ -46,6 +47,7 @@ public class StackOverflowExtractorApi {
         //for getting info from stackoverflow
         RestTemplate restTemplate = new RestTemplate();
         model.addAttribute("newest", "true");
+        model.addAttribute("baseUrl", Constants.BASE_URL);
         model.addAttribute("question", stackOverflowExtractorService.getNewestQuestion(qid));
         return "question";
     }
@@ -68,6 +70,7 @@ public class StackOverflowExtractorApi {
         //for getting info from stackoverflow
         RestTemplate restTemplate = new RestTemplate();
         model.addAttribute("mostvoted", "true");
+        model.addAttribute("baseUrl", Constants.BASE_URL);
         model.addAttribute("question", stackOverflowExtractorService.getMostVotedQuestion(qid));
         return "question";
     }

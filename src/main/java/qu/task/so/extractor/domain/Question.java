@@ -9,6 +9,7 @@ public class Question implements Serializable {
     private Stats stats;
     private String title;
     private String summary;
+    private String body;
     private List<Tag> tags;
     private List<UserInfo> userInfos;
 
@@ -51,6 +52,14 @@ public class Question implements Serializable {
 
     public List<UserInfo> getUserInfos() {
         return userInfos;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
     }
 
     @Override

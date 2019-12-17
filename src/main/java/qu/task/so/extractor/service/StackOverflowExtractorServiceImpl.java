@@ -50,13 +50,32 @@ public class StackOverflowExtractorServiceImpl implements StackOverflowExtractor
     @Override
     public Question getNewestQuestion(String questionId) {
         Question question = this.newestQuestions.get(questionId);
+        try {
+            question.setBody(getBodyOfQuestion(question.getUrl()));
+        } catch (IOException e) {
+        }
+
         return question;
     }
 
     @Override
     public Question getMostVotedQuestion(String questionId) {
         Question question = this.mostvotedQuestions.get(questionId);
+        try {
+            question.setBody(getBodyOfQuestion(question.getUrl()));
+        } catch (IOException e) {
+        }
         return question;
+    }
+
+    private String getBodyOfQuestion(String questionUrl) throws IOException {
+        String result = "";
+        Document doc = Jsoup.connect(Constants.BASE_URL + questionUrl).get();
+        Elements postTextElements = doc.getElementById("mainbar").getElementsByClass("post-text");
+        for (Element postText: postTextElements) {
+            result += postText.toString() + "\n";
+        }
+        return result;
     }
 
     private List<Question> getQuestionsFromUrl(String questionsUrl) throws IOException {

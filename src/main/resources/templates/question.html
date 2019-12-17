@@ -60,8 +60,15 @@
         </div>
 
     </div>
-    <div class="col-md-9 form-group">
-        <span>Full Body</span>
+    <div class="col-md-9 form-group text-left pull-left">
+        <h4><b><span>Question</span></b></h4>
+        <hr/>
+        <a th:href="${baseUrl} + ${question.url}">go to original question on stackoverflow.com</a><br/><br/>
+        <span th:utext="${question.body}"></span>
+
+        <h4><b><span>Answers</span></b></h4>
+        <hr/>
+        
     </div>
     <span class="clearfix"/>
 </div>
