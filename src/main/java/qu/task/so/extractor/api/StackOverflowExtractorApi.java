@@ -4,8 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestTemplate;
+import qu.task.so.extractor.domain.Settings;
 import qu.task.so.extractor.service.StackOverflowExtractorService;
 import qu.task.so.extractor.utils.Constants;
 
@@ -73,6 +76,18 @@ public class StackOverflowExtractorApi {
         model.addAttribute("baseUrl", Constants.BASE_URL);
         model.addAttribute("question", stackOverflowExtractorService.getMostVotedQuestion(qid));
         return "question";
+    }
+
+    @GetMapping("/settings")
+    public String greetingForm(Model model) {
+        model.addAttribute("message", "Settings of Application!");
+        model.addAttribute("settings", Constants.settings);
+        return "settings";
+    }
+
+    @PostMapping("/settings")
+    public String greetingSubmit(@ModelAttribute Settings settings) {
+        return "settings";
     }
 
     @Autowired
