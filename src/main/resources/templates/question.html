@@ -15,6 +15,9 @@
         .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
             background-color: #d8d9de;
         }
+        .borderline {
+            border-right: 1px dashed #d8d9de;
+        }
     </style>
 </head>
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -32,10 +35,10 @@
 <br>
 <br>
 <div class="container text-center pagination-centered">
-    <div class="page-header">
-        <h3><span th:text="${question.title}"></span></h3>
+    <div class="page-header text-left">
+        <h3><span style="color: chocolate;" th:text="${'Question Title: ' + question.title}"></span></h3>
     </div>
-    <div class="col-md-3 form-group text-left pull-left">
+    <div class="col-md-3 form-group text-left pull-left borderline">
         <h4><b><span>Statistics</span></b></h4>
         <span th:text="${question.stats.votes} + ' votes'"></span><br/>
         <span th:text="${question.stats.answers} + ' answers'"></span><br/>
@@ -62,13 +65,14 @@
     </div>
     <div class="col-md-9 form-group text-left pull-left">
         <h4><b><span>Question</span></b></h4>
+        <a th:href="${baseUrl} + ${question.url}">go to original question on stackoverflow.com</a>
         <hr/>
-        <a th:href="${baseUrl} + ${question.url}">go to original question on stackoverflow.com</a><br/><br/>
         <span th:utext="${question.body}"></span>
 
+        <br/>
         <h4><b><span>Answers</span></b></h4>
         <hr/>
-        
+        <span th:utext="${question.answers}"></span>
     </div>
     <span class="clearfix"/>
 </div>

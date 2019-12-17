@@ -10,6 +10,7 @@ public class Question implements Serializable {
     private String title;
     private String summary;
     private String body;
+    private String answers;
     private List<Tag> tags;
     private List<UserInfo> userInfos;
 
@@ -60,6 +61,14 @@ public class Question implements Serializable {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public String getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(String answers) {
+        this.answers = answers;
     }
 
     @Override

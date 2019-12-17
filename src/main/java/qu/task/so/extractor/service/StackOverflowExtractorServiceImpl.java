@@ -51,7 +51,7 @@ public class StackOverflowExtractorServiceImpl implements StackOverflowExtractor
     public Question getNewestQuestion(String questionId) {
         Question question = this.newestQuestions.get(questionId);
         try {
-            question.setBody(getBodyOfQuestion(question.getUrl()));
+            setBodyAndAnswerOfQuestion(question);
         } catch (IOException e) {
         }
 
@@ -62,20 +62,26 @@ public class StackOverflowExtractorServiceImpl implements StackOverflowExtractor
     public Question getMostVotedQuestion(String questionId) {
         Question question = this.mostvotedQuestions.get(questionId);
         try {
-            question.setBody(getBodyOfQuestion(question.getUrl()));
+            setBodyAndAnswerOfQuestion(question);
         } catch (IOException e) {
         }
         return question;
     }
 
-    private String getBodyOfQuestion(String questionUrl) throws IOException {
-        String result = "";
-        Document doc = Jsoup.connect(Constants.BASE_URL + questionUrl).get();
-        Elements postTextElements = doc.getElementById("mainbar").getElementsByClass("post-text");
-        for (Element postText: postTextElements) {
-            result += postText.toString() + "\n";
+    private void setBodyAndAnswerOfQuestion(Question question) throws IOException {
+        String body = "";
+        String answers = "";
+        Document doc = Jsoup.connect(Constants.BASE_URL + question.getUrl()).get();
+        Elements bodyElements = doc.getElementsByClass("postcell post-layout--right").get(0).getElementsByClass("post-text");
+        for (Element bodyElement : bodyElements) {
+            body += bodyElement.toString() + "\n";
         }
-        return result;
+        Elements answerElements = doc.getElementById("answers").getElementsByClass("post-text");
+        for (Element answerElement : answerElements) {
+            answers += answerElement.toString() + "\n";
+        }
+        question.setBody(body);
+        question.setAnswers(answers);
     }
 
     private List<Question> getQuestionsFromUrl(String questionsUrl) throws IOException {
@@ -133,7 +139,7 @@ public class StackOverflowExtractorServiceImpl implements StackOverflowExtractor
                         userName = userNameElements.get(0).text();
 
                     Elements reputationScoreElements = userInfoElement.getElementsByClass("reputation-score");
-                    if(reputationScoreElements != null && reputationScoreElements.size() != 0)
+                    if (reputationScoreElements != null && reputationScoreElements.size() != 0)
                         reputationScore = reputationScoreElements.get(0).text();
 
                     Elements goldElements = userInfoElement.getElementsByClass("badge1");
