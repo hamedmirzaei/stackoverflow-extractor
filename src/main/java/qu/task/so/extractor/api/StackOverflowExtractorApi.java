@@ -35,7 +35,7 @@ public class StackOverflowExtractorApi {
 
         //for getting info from stackoverflow
         RestTemplate restTemplate = new RestTemplate();
-        model.addAttribute("message", "Welcome to Newest Page!");
+        model.addAttribute("message", "Top 10 Newest Questions from StrackOverflow.com!");
         model.addAttribute("newest", "true");
         model.addAttribute("questions", stackOverflowExtractorService.getNewestQuestions());
         return "questions";
@@ -58,7 +58,7 @@ public class StackOverflowExtractorApi {
 
         //for getting info from stackoverflow
         RestTemplate restTemplate = new RestTemplate();
-        model.addAttribute("message", "Hello World From Most Voted!");
+        model.addAttribute("message", "Top 10 Most Voted Questions from StrackOverflow.com!");
         model.addAttribute("mostvoted", "true");
         model.addAttribute("questions", stackOverflowExtractorService.getMostVotedQuestions());
         return "questions";
