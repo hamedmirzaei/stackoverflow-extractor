@@ -1,37 +1,37 @@
 package qu.task.so.extractor.domain;
 
 public class Stats {
-    private Integer votes;
-    private Integer answers;
-    private Integer views;
+    private String votes;
+    private String answers;
+    private String views;
 
     protected Stats() {
     }
 
-    public Stats(Integer votes, Integer answers, Integer views) {
+    public Stats(String votes, String answers, String views) {
         this.votes = votes;
         this.answers = answers;
         this.views = views;
     }
 
-    public Integer getVotes() {
+    public String getVotes() {
         return votes;
     }
 
-    public Integer getAnswers() {
+    public String getAnswers() {
         return answers;
     }
 
-    public Integer getViews() {
+    public String getViews() {
         return views;
     }
 
     @Override
     public String toString() {
         return "Stats{" +
-                "votes=" + votes +
-                ", answers=" + answers +
-                ", views=" + views +
+                "votes='" + votes + '\'' +
+                ", answers='" + answers + '\'' +
+                ", views='" + views + '\'' +
                 '}';
     }
 }
