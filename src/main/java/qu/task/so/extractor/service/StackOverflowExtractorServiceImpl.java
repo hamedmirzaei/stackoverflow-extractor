@@ -12,17 +12,24 @@ import qu.task.so.extractor.domain.UserInfo;
 import qu.task.so.extractor.utils.Constants;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class StackOverflowExtractorServiceImpl implements StackOverflowExtractorService {
 
+    private Map<String, Question> newestQuestions = new HashMap<>();
+    private Map<String, Question> mostvotedQuestions = new HashMap<>();
+
     @Override
     public List<Question> getNewestQuestions() {
+        if (newestQuestions.size() != 0)
+            return newestQuestions.values().stream().collect(Collectors.toList());
+        newestQuestions.clear();
         try {
-            getQuestionsFromUrl(Constants.STACKOVERFLOW_NEWEST_URL);
+            List<Question> questions = getQuestionsFromUrl(Constants.STACKOVERFLOW_NEWEST_URL);
+            questions.stream().forEach(question -> newestQuestions.put(question.getId(), question));
+            return questions;
         } catch (IOException e) {
         }
         return Collections.EMPTY_LIST;
@@ -30,8 +37,11 @@ public class StackOverflowExtractorServiceImpl implements StackOverflowExtractor
 
     @Override
     public List<Question> getMostVotedQuestions() {
+        mostvotedQuestions.clear();
         try {
-            getQuestionsFromUrl(Constants.STACKOVERFLOW_MOSTVOTE_URL);
+            List<Question> questions = getQuestionsFromUrl(Constants.STACKOVERFLOW_MOSTVOTE_URL);
+            questions.stream().forEach(question -> mostvotedQuestions.put(question.getId(), question));
+            return questions;
         } catch (IOException e) {
         }
         return Collections.EMPTY_LIST;
@@ -65,7 +75,7 @@ public class StackOverflowExtractorServiceImpl implements StackOverflowExtractor
             for (Element userInfoElement : userInfoElements) {
                 String actionTime = userInfoElement.getElementsByClass("user-action-time").get(0).text();
                 String userName = userInfoElement.getElementsByClass("user-details").get(0).getElementsByTag("a").get(0).text();
-                Integer reputationScore = Integer.parseInt(userInfoElement.getElementsByClass("reputation-score").get(0).text().replace(",", ""));
+                String reputationScore = userInfoElement.getElementsByClass("reputation-score").get(0).text();
 
                 Integer goldBadges = 0;
                 Elements goldElements = userInfoElement.getElementsByClass("badge1");

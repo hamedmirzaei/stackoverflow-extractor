@@ -3,7 +3,7 @@ package qu.task.so.extractor.domain;
 public class Tag {
     private String name;
 
-    public Tag() {
+    protected Tag() {
     }
 
     public Tag(String name) {
@@ -12,10 +12,6 @@ public class Tag {
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override

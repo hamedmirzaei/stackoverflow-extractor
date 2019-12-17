@@ -1,13 +1,11 @@
 package qu.task.so.extractor.domain;
 
-import lombok.*;
-
 public class Stats {
     private Integer votes;
     private Integer answers;
     private Integer views;
 
-    public Stats() {
+    protected Stats() {
     }
 
     public Stats(Integer votes, Integer answers, Integer views) {
@@ -20,24 +18,12 @@ public class Stats {
         return votes;
     }
 
-    public void setVotes(Integer votes) {
-        this.votes = votes;
-    }
-
     public Integer getAnswers() {
         return answers;
     }
 
-    public void setAnswers(Integer answers) {
-        this.answers = answers;
-    }
-
     public Integer getViews() {
         return views;
-    }
-
-    public void setViews(Integer views) {
-        this.views = views;
     }
 
     @Override
