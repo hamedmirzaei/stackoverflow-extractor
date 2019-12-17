@@ -56,7 +56,13 @@ public class StackOverflowExtractorServiceImpl implements StackOverflowExtractor
             String votes = questionSummary.getElementsByClass("vote-count-post").get(0).getElementsByTag("strong").text();
             String answers = questionSummary.getElementsByClass("status").get(0).getElementsByTag("strong").text();
             String views = questionSummary.getElementsByClass("views").get(0).text();
-            Stats stats = new Stats(votes, answers, views.replace("views", "").trim());
+
+            Elements accepteds = questionSummary.getElementsByClass("answered-accepted");
+            Stats stats;
+            if (accepteds != null && accepteds.size() != 0)
+                stats = new Stats(votes, answers, views.replace("views", "").trim(), true);
+            else
+                stats = new Stats(votes, answers, views.replace("views", "").trim(), false);
 
 
             String title = questionSummary.getElementsByClass("question-hyperlink").get(0).text();
@@ -118,6 +124,8 @@ public class StackOverflowExtractorServiceImpl implements StackOverflowExtractor
                 userInfos.add(new UserInfo(actionTime, userName, reputationScore, goldBadges, silverBadges, bronzeBadges));
             }
             result.add(new Question(url, stats, title, summary, tags, userInfos));
+            if (result.size() == 10)
+                return result;
         }
         return result;
     }

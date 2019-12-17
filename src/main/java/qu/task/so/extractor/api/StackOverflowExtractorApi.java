@@ -39,8 +39,9 @@ public class StackOverflowExtractorApi {
         //for getting info from stackoverflow
         RestTemplate restTemplate = new RestTemplate();
         model.addAttribute("message", "Welcome to Newest Page!");
+        model.addAttribute("newest", "true");
         model.addAttribute("questions", stackOverflowExtractorService.getNewestQuestions());
-        return "newest";
+        return "questions";
     }
 
     @GetMapping("/newest/{qid}")
@@ -59,8 +60,9 @@ public class StackOverflowExtractorApi {
         //for getting info from stackoverflow
         RestTemplate restTemplate = new RestTemplate();
         model.addAttribute("message", "Hello World From Most Voted!");
+        model.addAttribute("mostvoted", "true");
         model.addAttribute("questions", stackOverflowExtractorService.getMostVotedQuestions());
-        return "mostvoted";
+        return "questions";
     }
 
     @Autowired
