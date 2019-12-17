@@ -15,8 +15,12 @@
         .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
             background-color: #d8d9de;
         }
-        .borderline {
+        .leftdiv {
             border-right: 1px dashed #d8d9de;
+            background-color: ghostwhite;
+        }
+        .rightdiv {
+            background-color: floralwhite;
         }
     </style>
 </head>
@@ -38,7 +42,7 @@
     <div class="page-header text-left">
         <h3><span style="color: chocolate;" th:text="${'Question Title: ' + question.title}"></span></h3>
     </div>
-    <div class="col-md-3 form-group text-left pull-left borderline">
+    <div class="col-md-3 form-group text-left pull-left leftdiv">
         <h4><b><span>Statistics</span></b></h4>
         <span th:text="${question.stats.votes} + ' votes'"></span><br/>
         <span th:text="${question.stats.answers} + ' answers'"></span><br/>
@@ -63,7 +67,7 @@
         </div>
 
     </div>
-    <div class="col-md-9 form-group text-left pull-left">
+    <div class="col-md-9 form-group text-left pull-left rightdiv">
         <h4><b><span>Question</span></b></h4>
         <a th:href="${baseUrl} + ${question.url}">go to original question on stackoverflow.com</a>
         <hr/>

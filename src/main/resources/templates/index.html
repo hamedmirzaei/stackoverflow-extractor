@@ -23,7 +23,7 @@
             <a class="navbar-brand" href="#">StackOverflow Extractor</a>
         </div>
         <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Settings</a></li>
+            <li class="active"><a href="/">Home</a></li>
             <li><a href="/newest">Newest</a></li>
             <li><a href="/mostvoted">Most Voted</a></li>
         </ul>
@@ -33,8 +33,22 @@
 <br>
 <div class="container text-center pagination-centered">
     <div class="page-header">
-        <h3><span th:text="${message}"></span></h3>
+        <h3><span style="color: chocolate;" th:text="${message}"></span></h3>
     </div>
+    <pre style="font-size: medium; font-family: inherit;">
+        This demo is provided using <i>Java</i> programming language and is based on <i>Spring Boot</i> framework.
+        The template engine for generating web pages is <i>Thymeleaf</i>.
+
+        As the task description dictates, you can see too menus <i>Newest</i> and <i>Most Voted</i> which their goal
+        is to show top 10 newest and top 10 most voted <i>Android</i> questions from <i>StackOverflow</i> website respectively.
+
+        Our demo uses <i>JSoup</i> -which is a powerful Java library- to extract information from
+        pages of <i>stackoverflow.com</i> website
+    </pre>
+    <br/>
+    <img src="imgs/java.jpg" style="width: 150px; height: 150px">
+    <img src="imgs/springboot.png" style="width: 150px; height: 150px">
+    <img src="imgs/jsoup.png" style="width: 150px; height: 150px">
 </div>
 <br>
 <footer class="footer navbar-inverse navbar-fixed-bottom">

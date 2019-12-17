@@ -26,7 +26,7 @@ public class StackOverflowExtractorApi {
 
         //for getting info from stackoverflow
         RestTemplate restTemplate = new RestTemplate();
-        model.addAttribute("message", "Hello World!");
+        model.addAttribute("message", "Welcome to Top 10 StackOverflow Question Extractor Website!");
         return "index";
     }
 
