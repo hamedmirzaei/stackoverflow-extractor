@@ -5,9 +5,11 @@ at `Queen's University`. The purpose of the application is to extract top 10 new
 `Android` questions from `stackoverflow.com` website.
 To make the application more useful, we provided followings:
 
-* Extract and Represent title and summary of top 10 newest questions 
-* Extract and Represent title and summary of top 10 most voted questions
-* Additional Information included: including question's body and answers, users involved, statistics and tags 
+* Extract and represent title and summary of top 10 newest questions 
+* Extract and represent title and summary of top 10 most voted questions
+* Additional information included: including question's body and answers, users involved, statistics and tags
+* Extract and represent more categories of questions
+* Extract and represent any arbitrary topic of interest (not just android)  
 
 
 ## Requirements
@@ -35,8 +37,10 @@ It will starts application on `http://localhost:8080` and you can access it thro
 
 Bellow are some images of the web pages:
 
-![Top 10 Newest Questions Page](imgs/newest.png)
+![Index Page](imgs/index.png)
 
-![Top 10 Most Voted Questions Page](imgs/mostvoted.png)
+![Settings Page](imgs/settings.png)
+
+![Top 10 Newest Questions Page](imgs/newest.png)
 
 ![One Question Page](imgs/onequestion.png)
