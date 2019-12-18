@@ -15,6 +15,9 @@
         .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
             background-color: #d8d9de;
         }
+        .textleft {
+            text-align: left !important;
+        }
     </style>
 </head>
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -23,9 +26,11 @@
             <a class="navbar-brand" href="#">StackOverflow Extractor</a>
         </div>
         <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Home</a></li>
+            <li><a href="/index">Home</a></li>
+            <li class="active"><a href="/settings">Settings</a></li>
             <li><a href="/newest">Newest</a></li>
             <li><a href="/mostvoted">Most Voted</a></li>
+            <li><a href="/questions">Parametrics</a></li>
         </ul>
     </div>
 </nav>
@@ -37,14 +42,26 @@
     </div>
     <form class="form-horizontal" action="#" th:action="@{/settings}" th:object="${settings}" method="post">
         <div class="form-group">
-            <label class="control-label col-sm-2" for="questionType">Questions About:</label>
-            <div class="col-sm-3">
-                <input id="questionType" type="text" th:field="*{questionType}" class="form-control" name="questionType" placeholder="Like Android">
+            <label class="control-label col-md-offset-4 col-md-2 textleft" for="questionTopic">Questions Topic:</label>
+            <div class="col-md-2">
+                <input id="questionTopic" type="text" th:field="*{questionTopic}" class="form-control pull-left" name="questionTopic" placeholder="Like android">
             </div>
         </div>
-
         <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-3">
+            <label class="control-label col-md-offset-4 col-md-2 textleft" for="sel1">Question Type:</label>
+            <div class="col-md-2">
+                <select class="form-control" th:field="*{questionType}" id="sel1">
+                    <option value="Newest">Newest</option>
+                    <option value="Featured">featured</option>
+                    <option value="Frequent">Frequent</option>
+                    <option value="Votes">Votes</option>
+                    <option value="Active">Active</option>
+                    <option value="Unanswered">Unanswered</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-6 col-md-2">
                 <input type="submit" class="btn btn-success" value="Submit" />
                 <input type="reset" class="btn btn-info" value="Reset" />
             </div>

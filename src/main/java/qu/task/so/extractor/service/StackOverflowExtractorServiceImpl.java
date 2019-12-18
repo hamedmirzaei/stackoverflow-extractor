@@ -20,11 +20,10 @@ public class StackOverflowExtractorServiceImpl implements StackOverflowExtractor
 
     private Map<String, Question> newestQuestions = new HashMap<>();
     private Map<String, Question> mostvotedQuestions = new HashMap<>();
+    private Map<String, Question> parametricQuestions = new HashMap<>();
 
     @Override
     public List<Question> getNewestQuestions() {
-        if (newestQuestions.size() != 0)
-            return newestQuestions.values().stream().collect(Collectors.toList());
         newestQuestions.clear();
         try {
             List<Question> questions = getQuestionsFromUrl(Constants.STACKOVERFLOW_NEWEST_URL);
@@ -48,6 +47,20 @@ public class StackOverflowExtractorServiceImpl implements StackOverflowExtractor
     }
 
     @Override
+    public List<Question> getParametricQuestions() {
+        parametricQuestions.clear();
+        try {
+            String url = Constants.STACKOVERFLOW_PARAMETRIC_URL.replace("MY_TOPIC", Constants.settings.getQuestionTopic())
+                    .replace("MY_TYPE", Constants.settings.getQuestionType());
+            List<Question> questions = getQuestionsFromUrl(url);
+            questions.stream().forEach(question -> parametricQuestions.put(question.getId(), question));
+            return questions;
+        } catch (IOException e) {
+        }
+        return Collections.EMPTY_LIST;
+    }
+
+    @Override
     public Question getNewestQuestion(String questionId) {
         Question question = this.newestQuestions.get(questionId);
         try {
@@ -61,6 +74,16 @@ public class StackOverflowExtractorServiceImpl implements StackOverflowExtractor
     @Override
     public Question getMostVotedQuestion(String questionId) {
         Question question = this.mostvotedQuestions.get(questionId);
+        try {
+            setBodyAndAnswerOfQuestion(question);
+        } catch (IOException e) {
+        }
+        return question;
+    }
+
+    @Override
+    public Question getParametricQuestion(String questionId) {
+        Question question = this.parametricQuestions.get(questionId);
         try {
             setBodyAndAnswerOfQuestion(question);
         } catch (IOException e) {

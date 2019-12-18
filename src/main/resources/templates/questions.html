@@ -15,10 +15,12 @@
         .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
             background-color: #d8d9de;
         }
+
         .mymiddle {
             vertical-align: middle !important;
             text-align: center !important;
         }
+
         .table tr > td.success {
             background-color: #dff0d8 !important;
         }
@@ -35,9 +37,11 @@
             <a class="navbar-brand" href="#">StackOverflow Extractor</a>
         </div>
         <ul class="nav navbar-nav">
-            <li><a href="/">Home</a></li>
+            <li><a href="/index">Home</a></li>
+            <li><a href="/settings">Settings</a></li>
             <li th:class="${newest}? 'active' : 'normal'"><a href="/newest">Newest</a></li>
             <li th:class="${mostvoted}? 'active' : 'normal'"><a href="/mostvoted">Most Voted</a></li>
+            <li th:class="${parametrics}? 'active' : 'normal'"><a href="/questions">Parametrics</a></li>
         </ul>
     </div>
 </nav>
@@ -52,12 +56,14 @@
             <td style="font-size: larger" colspan="3"><b>Question</b></td>
         </tr>
         <tr th:each="question,iterator: ${questions}">
-            <td th:class="${question.stats.answerAccepted}? 'mymiddle success' : 'mymiddle error'" th:text="${iterator.index + 1}"></td>
+            <td th:class="${question.stats.answerAccepted}? 'mymiddle success' : 'mymiddle error'"
+                th:text="${iterator.index + 1}"></td>
             <td>
                 <span style="font-size: larger" th:utext="'<b>Title:</b> ' + ${question.title}"></span><br/>
                 <span style="font-size: small" th:utext="'<b>Summary:</b> ' + ${question.summary}"></span>
             </td>
-            <td class="mymiddle"><a th:href="@{${newest}?'/newest/' + ${question.id}:'/mostvoted/' + ${question.id}}">view more</a></td>
+            <td class="mymiddle"><a th:href="@{${preurl} + ${question.id}}">view
+                more</a></td>
         </tr>
     </table>
 </div>

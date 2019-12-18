@@ -9,7 +9,11 @@ public interface StackOverflowExtractorService {
 
     List<Question> getMostVotedQuestions();
 
+    List<Question> getParametricQuestions();
+
     Question getNewestQuestion(String questionId);
 
     Question getMostVotedQuestion(String questionId);
+
+    Question getParametricQuestion(String questionId);
 }

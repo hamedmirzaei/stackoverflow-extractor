@@ -17,7 +17,7 @@
         }
         .leftdiv {
             border-right: 1px dashed #d8d9de;
-            background-color: ghostwhite;
+            background-color: papayawhip;
         }
         .rightdiv {
             background-color: floralwhite;
@@ -30,9 +30,11 @@
             <a class="navbar-brand" href="#">StackOverflow Extractor</a>
         </div>
         <ul class="nav navbar-nav">
-            <li><a href="/">Settings</a></li>
-            <li th:class="${newest}? 'active' : 'normal'"><a href="/newest">Newest</a></li>
-            <li th:class="${mostvoted}? 'active' : 'normal'"><a href="/mostvoted">Most Voted</a></li>
+            <li><a href="/index">Home</a></li>
+            <li><a href="/settings">Settings</a></li>
+            <li><a href="/newest">Newest</a></li>
+            <li><a href="/mostvoted">Most Voted</a></li>
+            <li><a href="/questions">Parametrics</a></li>
         </ul>
     </div>
 </nav>
